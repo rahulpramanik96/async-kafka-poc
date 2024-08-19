@@ -67,15 +67,6 @@ public class KafkaConfig {
 	}
 
 	@Bean
-	public ReplyingKafkaTemplate<String, Student, Result> replyingKafkaTemplate() {
-		ConcurrentKafkaListenerContainerFactory<String, Result> factory = kafkaResultListenerContainerFactory();
-		ConcurrentMessageListenerContainer<String, Result> replyContainer = factory.createContainer(replyTopic);
-		replyContainer.getContainerProperties().setMissingTopicsFatal(false);
-		replyContainer.getContainerProperties().setGroupId(groupId);
-		return new ReplyingKafkaTemplate<>(producerFactory(), replyContainer);
-	}
-
-	@Bean
 	public Map<String, Object> consumerConfigs() {
 		Map<String, Object> configProps = new HashMap<>();
 		configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
